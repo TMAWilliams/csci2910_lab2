@@ -1,4 +1,14 @@
-﻿namespace csci2910_lab2
+﻿/**
+*--------------------------------------------------------------------
+* File name: Program.cs
+* Project name: csci2910_lab2
+*--------------------------------------------------------------------
+* Author’s name and email: Tessa Williams williamstm5@etsu.edu
+* Course-Section: CSCI-2910
+* Creation Date: 05/25/2023
+* -------------------------------------------------------------------
+*/
+namespace csci2910_lab2
 {
     public class Program
     {
