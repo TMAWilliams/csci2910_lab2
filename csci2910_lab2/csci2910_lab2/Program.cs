@@ -8,11 +8,12 @@
 * Creation Date: 05/25/2023
 * -------------------------------------------------------------------
 */
+using ConsoleTables;
 namespace csci2910_lab2
 {
     public class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
             int menuOpt;
             //Display welcome message in center of window
@@ -70,7 +71,26 @@ namespace csci2910_lab2
                         DisplayMultiplicationTable(num, highestNum);
                         break;
                     case 3:
-
+                        //Section header with title displayed
+                        title = "Bytes in Memory Table";
+                        Divider();
+                        Console.SetCursorPosition((Console.WindowWidth - title.Length) / 2, Console.CursorTop);
+                        Console.WriteLine(title);
+                        Divider();
+                        //using ConsoleTables generate a new table and add rows of information. Then display that table.
+                        var table = new ConsoleTable("Type","Byte(s) of memory","Min","Max");
+                        table.AddRow("sbyte", sizeof(sbyte), sbyte.MinValue, sbyte.MaxValue);
+                        table.AddRow("byte", sizeof(byte), byte.MinValue, byte.MaxValue);
+                        table.AddRow("short", sizeof(short), short.MinValue, short.MaxValue);
+                        table.AddRow("ushort", sizeof(ushort), ushort.MinValue, ushort.MaxValue);
+                        table.AddRow("int", sizeof(int), int.MinValue, int.MaxValue);
+                        table.AddRow("uint", sizeof(uint), uint.MinValue, uint.MaxValue);
+                        table.AddRow("long", sizeof(long), long.MinValue, long.MaxValue);
+                        table.AddRow("ulong", sizeof(ulong), ulong.MinValue, ulong.MaxValue);
+                        table.AddRow("float", sizeof(float), float.MinValue, float.MaxValue);
+                        table.AddRow("double", sizeof(double), double.MinValue, double.MaxValue);
+                        table.AddRow("sbyte", sizeof(decimal), decimal.MinValue, decimal.MaxValue);
+                        table.Write(Format.Alternative);
                         break;
                     case 4:
 
