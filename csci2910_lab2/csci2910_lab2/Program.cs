@@ -39,7 +39,7 @@ namespace csci2910_lab2
 
                         //Get two integers from user and add them together. Then display the sum.
                         int sum;
-                        sum = Sum(GetTwoIntegers());
+                        sum = SumOfArray(GetTwoIntegers());
                         Console.WriteLine($"Sum = {sum}");
                         break;
                     case 2:
@@ -77,6 +77,7 @@ namespace csci2910_lab2
                         Console.SetCursorPosition((Console.WindowWidth - title.Length) / 2, Console.CursorTop);
                         Console.WriteLine(title);
                         Divider();
+
                         //using ConsoleTables generate a new table and add rows of information. Then display that table.
                         var table = new ConsoleTable("Type","Byte(s) of memory","Min","Max");
                         table.AddRow("sbyte", sizeof(sbyte), sbyte.MinValue, sbyte.MaxValue);
@@ -93,7 +94,71 @@ namespace csci2910_lab2
                         table.Write(Format.Alternative);
                         break;
                     case 4:
+                        double num1;
+                        double num2;
+                        char operand;
+                        double answer;
+                        string cont = "";
+                        //Section header with title displayed
+                        title = "Calculator";
+                        Divider();
+                        Console.SetCursorPosition((Console.WindowWidth - title.Length) / 2, Console.CursorTop);
+                        Console.WriteLine(title);
+                        Divider();
+                        do
+                        {
+                            //Get and validate first number for equation
+                            Console.Write("First Number: ");
+                            success = Double.TryParse(Console.ReadLine(), out num1);
+                            while (!success)
+                            {
+                                Console.Write("*Invalid Input* Please enter a number: ");
+                                success = Double.TryParse(Console.ReadLine(), out num1);
+                            }
+                            //Get and validate operand for equation
+                            Console.Write("Select an Operand (+,-,*,/,%): ");
+                            operand = Console.ReadLine()[0];
+                            while (operand != '+' && operand != '-' && operand != '*' && operand != '/' && operand != '%')
+                            {
+                                Console.Write("*Invalid Input* Select an Operand (+,-,*,/,%): ");
+                                operand = Console.ReadLine()[0];
+                            }
+                            //Get and validate second number for equation
+                            Console.Write("Second Number: ");
+                            success = Double.TryParse(Console.ReadLine(), out num2);
+                            while (!success)
+                            {
+                                Console.Write("*Invalid Input* Please enter a number: ");
+                                success = Double.TryParse(Console.ReadLine(), out num2);
+                            }
 
+                            if (operand == '+')
+                            {
+                                Console.WriteLine(Add(num1, num2));
+                            }
+                            else if (operand == '-')
+                            {
+                                Console.WriteLine(Subtract(num1, num2));
+                            }
+                            else if (operand == '*')
+                            {
+                                Console.WriteLine(Multiply(num1, num2));
+                            }
+                            else if (operand == '/')
+                            {
+                                Console.WriteLine(Divide(num1, num2));
+                            }
+                            else if (operand == '%')
+                            {
+                                Console.WriteLine(Mod(num1, num2));
+                            }
+                            else
+                            {
+                                Console.WriteLine("An Error occured...");
+                            }
+                            Console.WriteLine("Type 'esc' to go back to the main menu, or enter key to continue...");
+                            cont = Console.ReadLine();
+                        } while (cont != "esc");
                         break;
                     case 0:
 
@@ -179,7 +244,7 @@ namespace csci2910_lab2
         /// <param name="num1">first integer to add</param>
         /// <param name="num2">second integer to add</param>
         /// <returns>int sum of the two numbers</returns>
-        public static int Sum(int[] nums)
+        public static int SumOfArray(int[] nums)
         {
             int sum = 0;
             for (int i = 0; i < nums.Length; i++)
@@ -232,6 +297,66 @@ namespace csci2910_lab2
             {
                 Console.WriteLine($"{baseNum}*{i} = {baseNum*i}");
             }
+        }
+        /// <summary>
+        /// finds the sum of two numbers
+        /// </summary>
+        /// <param name="num1">first number to add</param>
+        /// <param name="num2">second number to add</param>
+        /// <returns>sum of both numbers</returns>
+        public static double Add(double num1, double num2)
+        {
+            double sum;
+            sum = num1 + num2;
+            return sum;
+        }
+        /// <summary>
+        /// finds the difference of two numbers
+        /// </summary>
+        /// <param name="num1">first number to subtract from</param>
+        /// <param name="num2">number to subtract from the first</param>
+        /// <returns>the difference between the two numbers</returns>
+        public static double Subtract(double num1, double num2)
+        {
+            double diff;
+            diff = num1 - num2;
+            return diff;
+        }
+        /// <summary>
+        /// finds the product of two numbers
+        /// </summary>
+        /// <param name="num1">first number to multiply</param>
+        /// <param name="num2">second number to multiply</param>
+        /// <returns>product of two numbers</returns>
+        public static double Multiply(double num1, double num2)
+        {
+            double product;
+            product = num1 * num2;
+            return product;
+        }
+        /// <summary>
+        /// finds the quotient of two numbers
+        /// </summary>
+        /// <param name="num1">the dividend</param>
+        /// <param name="num2">the divisor</param>
+        /// <returns>the quotient of the two numbers</returns>
+        public static double Divide(double num1, double num2)
+        {
+            double quotient;
+            quotient = num1 / num2;
+            return quotient;
+        }
+        /// <summary>
+        /// finds the remainder left of two divided numbers
+        /// </summary>
+        /// <param name="num1">dividen</param>
+        /// <param name="num2">divisor</param>
+        /// <returns>the remainder from the division</returns>
+        public static double Mod(double num1, double num2)
+        {
+            double modulous;
+            modulous = num1 % num2;
+            return modulous;
         }
     }
 }
