@@ -24,10 +24,21 @@ namespace csci2910_lab2
             {
                 DisplayMenu();
                 menuOpt = GetMenuOpt(4);
+                Console.Clear();
                 switch (menuOpt)
                 {
+                    
                     case 1:
+                        int sum;
+                        string title = "Add Two Numbers";
 
+                        Divider();
+                        Console.SetCursorPosition((Console.WindowWidth - title.Length) / 2, Console.CursorTop);
+                        Console.WriteLine(title);
+                        Divider();
+
+                        sum = Sum(GetTwoIntegers());
+                        Console.WriteLine($"Sum = {sum}");
                         break;
                     case 2:
 
@@ -91,7 +102,6 @@ namespace csci2910_lab2
             {
                 try
                 {
-                    Console.SetCursorPosition(3, Console.CursorTop);
                     Console.Write("Menu Selection: ");
                     menuopt = int.Parse(Console.ReadLine());
                     if (menuopt > maxOpt || menuopt < 0)
@@ -116,6 +126,54 @@ namespace csci2910_lab2
             }
 
             return menuopt;
+        }
+        /// <summary>
+        /// Finds the sum of an array of integers
+        /// </summary>
+        /// <param name="num1">first integer to add</param>
+        /// <param name="num2">second integer to add</param>
+        /// <returns>int sum of the two numbers</returns>
+        public static int Sum(int[] nums)
+        {
+            int sum = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                sum += nums[i];
+            }
+            return sum;
+        }
+        /// <summary>
+        /// Asks for user to input two numbers, and validates that the inputs are integers. 
+        /// If not, the user is asked for inputs again until a valid input is received.
+        /// </summary>
+        /// <returns>array containing the two integers from the user</returns>
+        public static int[] GetTwoIntegers()
+        {
+            bool success;
+            int num1;
+            int num2;
+            int[] nums = new int[2];
+            Console.WriteLine("Please enter numbers to add...");
+            Console.Write("First number: ");
+            success = Int32.TryParse(Console.ReadLine(), out num1);
+            while (!success)
+            {
+                Console.WriteLine("*Invalid Input* Please enter an integer...");
+                Console.Write("First number: ");
+                success = Int32.TryParse(Console.ReadLine(), out num1);
+            }
+            Console.Write("Second number: ");
+            success = Int32.TryParse(Console.ReadLine(), out num2);
+            while (!success)
+            {
+                Console.WriteLine("*Invalid Input* Please enter an integer...");
+                Console.Write("Second number: ");
+                success = Int32.TryParse(Console.ReadLine(), out num2);
+            }
+            nums[0] = num1;
+            nums[1] = num2;
+
+            return nums;
         }
     }
 }
