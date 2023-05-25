@@ -29,19 +29,45 @@ namespace csci2910_lab2
                 {
                     
                     case 1:
-                        int sum;
+                        //Section header with title displayed
                         string title = "Add Two Numbers";
-
                         Divider();
                         Console.SetCursorPosition((Console.WindowWidth - title.Length) / 2, Console.CursorTop);
                         Console.WriteLine(title);
                         Divider();
 
+                        //Get two integers from user and add them together. Then display the sum.
+                        int sum;
                         sum = Sum(GetTwoIntegers());
                         Console.WriteLine($"Sum = {sum}");
                         break;
                     case 2:
+                        //Section header with title displayed
+                        title = "Add Two Numbers";
+                        Divider();
+                        Console.SetCursorPosition((Console.WindowWidth - title.Length) / 2, Console.CursorTop);
+                        Console.WriteLine(title);
+                        Divider();
 
+                        //Get an integer from the user and display the multiplication table based on how high the user wishes to multiply by.
+                        int num;
+                        int highestNum;
+                        bool success;
+                        Console.Write("Enter the integer you'd like to see a multiplication table for: ");
+                        success = Int32.TryParse(Console.ReadLine(), out num);
+                        while (!success)
+                        {
+                            Console.Write("*Invalid Input* Please enter an integer: ");
+                            success = Int32.TryParse(Console.ReadLine(), out num);
+                        }
+                        Console.Write("Enter the highest integer you wish to multiply by: ");
+                        success = Int32.TryParse(Console.ReadLine(), out highestNum);
+                        while (!success)
+                        {
+                            Console.Write("*Invalid Input* Please enter an integer: ");
+                            success = Int32.TryParse(Console.ReadLine(), out highestNum);
+                        }
+                        DisplayMultiplicationTable(num, highestNum);
                         break;
                     case 3:
 
@@ -174,6 +200,18 @@ namespace csci2910_lab2
             nums[1] = num2;
 
             return nums;
+        }
+        /// <summary>
+        /// displays a multiplication table for a base integer up to a specified limit
+        /// </summary>
+        /// <param name="baseNum">the base integer for the multiplication table</param>
+        /// <param name="highestNum">the highest integer to multiply by</param>
+        public static void DisplayMultiplicationTable(int baseNum, int highestNum)
+        {
+            for (int i = 0; i <= highestNum; i++)
+            {
+                Console.WriteLine($"{baseNum}*{i} = {baseNum*i}");
+            }
         }
     }
 }
